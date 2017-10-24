@@ -16,27 +16,33 @@
           <div class="pay" @click="pay" :class="payClass">{{payDesc}}</div>
         </div>
       </div>
-      <div class="shopcart-list" v-show = "listShow">
-        <div class="list-head">
-          <div class="title">购物车</div>
-          <div class="empty" @click="empty"> 清空</div>
+      <transition name="move">
+        <div class="shopcart-list" v-show = "listShow">
+          <div class="list-head">
+            <div class="title">购物车</div>
+            <div class="empty" @click="empty"> 清空</div>
+          </div>
+          <div class="list-content" ref="shopList">
+            <ul>
+              <li class="food" v-for="food in selectFoods">
+                <span>{{food.name}}</span>
+                <div class="price">
+                  <span>￥{{food.price*food.count}}</span>
+                </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="list-content" ref="shopList">
-          <ul>
-            <li class="food" v-for="food in selectFoods">
-              <span>{{food.name}}</span>
-              <div class="price">
-                <span>￥{{food.price*food.count}}</span>
-              </div>
-              <div class="cartcontrol-wrapper">
-                <cartcontrol :food="food"></cartcontrol>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+
+      </transition>
+      <transition name="move">
+      <div class="list-mask" v-show="listShow" @click="hiddenModal"></div>
+      </transition>
     </div>
-    <div class="list-mask" v-show="listShow" @click="hiddenModal"></div>
+
   </div>
 </template>
 <script>
@@ -157,10 +163,11 @@
     bottom:0;
     height 48px
     width:100%;
-    background #141d27
+
     z-index 50
     .content
       display flex
+      background #141d27
       .left
         flex:1;
         .icons
@@ -239,6 +246,11 @@
       left:0;
       z-index -1
       width:100%;
+      transform translate3d(0,0,0)
+      &.move-enter-active, &.move-leave-active
+        transition all 0.2s linear
+      &.move-enter, &.move-leave-active
+        transform: translate3d(0, 100%, 0)
       .list-head
         box-sizing border-box
         width 100%
@@ -280,7 +292,12 @@
     left: 0;
     right 0
     bottom 0
-    z-index: 40;
+    z-index: -3;
     opacity: 1;
     background: rgba(7,17,27,0.6);
+    opacity 1
+    &.move-enter-active, &.move-leave-active
+      transition all 0.2s linear
+    &.move-enter, &.move-leave-active
+      opacity 0
 </style>
