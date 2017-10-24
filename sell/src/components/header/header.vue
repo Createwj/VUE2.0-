@@ -29,7 +29,7 @@
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
-    <transition>
+    <transition name="move">
       <div v-show="detailShow" class="detail">
         <div class="detail-wrapper clearfix">
           <div class="detail-main">
@@ -220,9 +220,9 @@
     backdrop-filter: blur(10px)
     opacity 1
     background: rgba(7, 17, 27, 0.8)
-    &.fade-enter-active, &.fade-leave-active
+    &.move-enter-active, &.move-leave-active
       transition: all 0.5s
-    &.fade-enter, &.fade-leave-active
+    &.move-enter, &.move-leave-active
       opacity: 0
       background: rgba(7, 17, 27, 0)
     .detail-wrapper
