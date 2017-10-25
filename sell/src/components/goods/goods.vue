@@ -34,7 +34,8 @@
             </li>
           </ul>
         </div>
-      <shopcart :selectFoods="selectFoods" :seller="seller"  ref="shopcart"></shopcart>
+      <!--<shopcart :selectFoods="selectFoods" :seller="seller"  ref="shopcart"></shopcart>-->
+      <shopcart :selectFoods="selectFoods" :seller="seller"></shopcart>
       <food :food="selectFod" ref="food"></food>
     </div>
   </div>
@@ -91,7 +92,7 @@
         let foods = [];
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {
-            if (food.count) {
+            if (food.count) {  // 如果food有count属性的话说明在购物车中 否则不在购物车中
               foods.push(food);
             }
           });
