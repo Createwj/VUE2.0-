@@ -65,7 +65,7 @@
     created() {
       console.log(json);
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-//      this.$http.get('/api/goods').then((response) => {});
+//      this.$http.get('/api/goods').then((response) => {});     // 因为需要放置到GitHub 视图中显示数据是通过import导入
 //        response = response.body;
 //        if (response.errno === ERR_OK) {};
       this.goods = json.goods;
@@ -161,6 +161,7 @@
     bottom 46px
     top 174px
     overflow hidden
+    width 100%
     .current
       background #fff
     .goods-left

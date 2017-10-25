@@ -36,7 +36,6 @@
             </ul>
           </div>
         </div>
-
       </transition>
       <transition name="move">
       <div class="list-mask" v-show="listShow" @click="hiddenModal"></div>
@@ -60,6 +59,9 @@
       seller: {
         type: Object
       }
+    },
+    created() {
+      console.log(this.selectFoods);
     },
     data() {
       return {
